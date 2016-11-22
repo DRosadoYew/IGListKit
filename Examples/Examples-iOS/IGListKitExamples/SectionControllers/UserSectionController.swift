@@ -39,5 +39,6 @@ final class UserSectionController: IGListSectionController, IGListSectionType {
     }
 
     func didSelectItem(at index: Int) {}
-
+    func didDeselectItem(at index: Int) {}
+    
 }

@@ -63,6 +63,7 @@ final class WorkingRangeSectionController: IGListSectionController, IGListSectio
     }
 
     func didSelectItem(at index: Int) {}
+    func didDeselectItem(at index: Int) {}
 
     //MARK: IGListWorkingRangeDelegate
 

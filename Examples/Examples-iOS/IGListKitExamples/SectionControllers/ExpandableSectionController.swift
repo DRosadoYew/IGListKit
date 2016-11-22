@@ -45,5 +45,7 @@ final class ExpandableSectionController: IGListSectionController, IGListSectionT
         expanded = !expanded
         collectionContext?.reload(self)
     }
+    
+    func didDeselectItem(at index: Int) {}
 
 }
