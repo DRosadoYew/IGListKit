@@ -788,21 +788,36 @@ XCTAssertEqual(CGPointEqualToPoint(point, p), YES); \
     XCTAssertFalse(s2.wasSelected);
 }
 
-- (void)test_whenDisplayingCell_thatCollectionViewDelegateReceivesMethod {
+- (void)test_whenDeselectingCell_thatSectionControllerReceivesMethod {
     self.dataSource.objects = @[@0, @1, @2];
     [self.adapter reloadDataWithCompletion:nil];
-
-    id mockDelegate = [OCMockObject mockForProtocol:@protocol(UICollectionViewDelegate)];
-    self.adapter.collectionViewDelegate = mockDelegate;
-
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-    UICollectionViewCell *cell = [UICollectionViewCell new];
-    [[mockDelegate expect] collectionView:self.collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
+    
+    // make sure that we first select a cell
+    [self.adapter collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+    IGListTestSection *s0 = [self.adapter sectionControllerForObject:@0];
+    XCTAssertTrue(s0.wasSelected);
+    
+    [self.adapter deselectItemAtIndex:0 sectionController:s0 animated:NO];
+    XCTAssertFalse(s0.wasSelected);
+}
 
-    // simulates the collectionview telling its delegate that a cell will be displayed
-    [self.adapter collectionView:self.collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
-
-    [mockDelegate verify];
+- (void)test_whenDeselectingCell_thatCollectionViewCellIsDeselected {
+    self.dataSource.objects = @[@0];
+    [self.adapter reloadDataWithCompletion:nil];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    
+    // make sure that we first select a cell
+    [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    NSArray *selectedIndexPaths = [self.collectionView indexPathsForSelectedItems];
+    NSIndexPath *selectedIndexPath = selectedIndexPaths.firstObject;
+    XCTAssertTrue([indexPath compare:selectedIndexPath] == NSOrderedSame);
+    
+    IGListTestSection *s0 = [self.adapter sectionControllerForObject:@0];
+    [self.adapter deselectItemAtIndex:0 sectionController:s0 animated:NO];
+    XCTAssertTrue([self.collectionView indexPathsForSelectedItems].count == 0);
 }
 
 - (void)test_whenWillBeginDragging_thatScrollViewDelegateReceivesMethod {
