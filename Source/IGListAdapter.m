@@ -773,7 +773,8 @@
     IGAssertMainThread();
     IGParameterAssert(sectionController != nil);
     NSIndexPath *indexPath = [self indexPathForSectionController:sectionController index:index];
-    [self.collectionView deselectItemAtIndexPath:indexPath animated:animated];
+    [self.collectionView deselectItemAtIndexPath:indexPath animated:animated];    
+    [sectionController didDeselectItemAtIndex:indexPath.item];
 }
 
 - (__kindof UICollectionViewCell *)dequeueReusableCellOfClass:(Class)cellClass

@@ -39,4 +39,8 @@
     self.wasSelected = YES;
 }
 
+- (void)didDeselectItemAtIndex:(NSInteger)index {
+    self.wasSelected = NO;
+}
+
 @end

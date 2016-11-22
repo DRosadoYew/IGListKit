@@ -789,7 +789,7 @@ XCTAssertEqual(CGPointEqualToPoint(point, p), YES); \
 }
 
 - (void)test_whenDeselectingCell_thatSectionControllerReceivesMethod {
-    self.dataSource.objects = @[@0, @1, @2];
+    self.dataSource.objects = @[@0];
     [self.adapter reloadDataWithCompletion:nil];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
