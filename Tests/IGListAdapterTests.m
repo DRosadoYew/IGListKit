@@ -850,4 +850,8 @@ XCTAssertEqual(CGPointEqualToPoint(point, p), YES); \
     XCTAssertEqual(self.collectionView.numberOfSections, 3);
 }
 
+- (void)test_fail {
+    XCTFail(@"Failing on purpose to see if Travis job/build fails");
+}
+
 @end
