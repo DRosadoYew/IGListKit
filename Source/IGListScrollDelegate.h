@@ -33,7 +33,7 @@
  @param listAdapter       The list adapter whose collection view will drag.
  @param sectionController The visible section controller that will drag.
  */
-- (void)listAdapter:(IGListAdapter *)listAdapter willBeginDraggingSectionController:(IGListSectionController <IGListSectionType> *)sectionController;
+- (fail build here)listAdapter:(IGListAdapter *)listAdapter willBeginDraggingSectionController:(IGListSectionController <IGListSectionType> *)sectionController;
 
 /**
  Tells the delegate that the section controller did end dragging on screen.
